@@ -1,0 +1,25 @@
+opam-version: "1.3"
+descr: """
+latest trunk snapshot with frame-pointers and flambda activated
+"""
+maintainer: "contact@ocamlpro.com"
+depends: ["base-unix" "base-bigarray" "base-threads"]
+flags: compiler
+setenv: CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"
+build: [
+  [
+    "./configure"
+    "-prefix"
+    prefix
+    "-with-debug-runtime"
+    "-with-frame-pointers"
+    "-flambda"
+  ]
+  [make "world"]
+  [make "world.opt"]
+  [make "install"]
+]
+substs: "ocaml.config"
+url {
+  src: "https://github.com/ocaml/ocaml/tarball/4.03"
+}

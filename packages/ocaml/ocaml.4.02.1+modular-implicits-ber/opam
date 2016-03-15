@@ -1,0 +1,24 @@
+opam-version: "1.3"
+descr: """
+OCaml 4.02, with support for modular implicits and staging.
+"""
+maintainer: "contact@ocamlpro.com"
+depends: [
+  "base-unix"
+  "base-bigarray"
+  "base-threads"
+  "base-ocamlbuild"
+  "base-metaocaml-ocamlfind"
+]
+flags: compiler
+setenv: CAML_LD_LIBRARY_PATH = "%{lib}%/stublibs"
+build: [
+  ["./configure" "-prefix" "%{prefix}%"]
+  ["%{make}%" "world" "opt" "opt.opt"]
+  ["%{make}%" "install"]
+  ["%{make}%" "-C" "metalib" "all" "install"]
+]
+substs: "ocaml.config"
+url {
+  src: "https://github.com/yallop/ocaml/archive/modular-implicits-ber.tar.gz"
+}
